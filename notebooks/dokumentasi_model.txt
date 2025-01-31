@@ -1,0 +1,116 @@
+Analisis Hasil Random Forest:
+Baseline Performance (100 trees, no constraints):
+
+RMSE: 8.85, MAE: 7.49, MAPE: 19.83%
+Ini adalah baseline dari model Random Forest tanpa batasan kedalaman pohon (max_depth=None) dan dengan minimum sampel per daun yang kecil (min_samples_leaf=1).
+
+200 Trees, Limited Depth (max_depth=10, min_samples_leaf=2):
+
+RMSE: 8.54, MAE: 7.31, MAPE: 19.40%
+Peningkatan signifikan dibandingkan baseline dalam semua metrik. Ini menunjukkan bahwa menambahkan lebih banyak pohon dan mengatur kedalaman maksimum ke 10 membantu mencegah overfitting.
+
+300 Trees, Deeper Trees (max_depth=20, min_samples_leaf=5, min_samples_split=10):
+
+RMSE: 8.71, MAE: 7.41, MAPE: 19.63%
+Performanya sedikit lebih buruk dibandingkan kombinasi kedua, meskipun jumlah pohon lebih banyak. Ini bisa jadi akibat model menjadi lebih kompleks dan mulai sedikit overfit.
+
+Kesimpulan:
+kita akan tetapkan hyperparameter untuk final model random forest ini dengan:
+
+Kombinasi kedua:
+
+n_estimators=200, max_depth=10, min_samples_leaf=2 adalah konfigurasi terbaik karena memberikan nilai RMSE, MAE, dan MAPE terendah.
+----------------------------------------------------------------------------------------------------------------------------------------
+Analisis Hasil Gradient Boosting:
+Konfigurasi Default:
+
+n_estimators: 100, learning_rate: 0.1, max_depth: 3.
+Hasil baseline: RMSE: 8.53, MAE: 7.30, MAPE: 19.58%
+
+Konfigurasi Optimal:
+
+n_estimators: 200, learning_rate: 0.05, max_depth: 5.
+Performa meningkat: RMSE: 8.50, MAE: 7.28, MAPE (nonzero): 19.48%
+Penurunan kecil pada semua metrik dibanding baseline, menunjukkan konfigurasi ini lebih optimal.
+
+Overfitting:
+
+n_estimators: 300, learning_rate: 0.01, max_depth: 7.
+Performanya memburuk: RMSE: 10.02, MAE: 8.31, MAPE: 30.01%
+Learning rate terlalu kecil dan model terlalu kompleks menyebabkan overfitting atau kesulitan menangkap pola data.
+
+Kesimpulan:
+n_estimators: 200, learning_rate: 0.05, max_depth: 5 adalah konfigurasi terbaik karena memberikan nilai RMSE, MAE, dan MAPE terrendah.
+----------------------------------------------------------------------------------------------------------------------------------------
+
+Analisis Perbandingan antara model berbasis fitur: random forest dan gradient boosting
+Performansi Metriks:
+
+RMSE: Gradient Boosting sedikit lebih baik dengan nilai RMSE lebih kecil (8.50 vs. 8.50).
+MAE: Gradient Boosting lebih unggul dengan nilai MAE yang lebih kecil (7.28 vs. 7.28).
+MAPE: Random Forest memiliki nilai MAPE yang sedikit lebih baik (19.40% vs. 19.48%), tetapi perbedaannya sangat kecil dan tidak signifikan.
+
+Distribusi Residuals:
+
+Kedua model menunjukkan distribusi residuals yang simetris, tanpa bias signifikan.
+Gradient Boosting memiliki distribusi residuals yang sedikit lebih rapat, yang menunjukkan prediksi yang lebih konsisten.
+
+Visualisasi Actual vs Predicted:
+
+Kedua model menunjukkan hubungan yang baik antara nilai aktual dan prediksi.
+Gradient Boosting menunjukkan titik yang lebih rapat di sekitar garis diagonal, menunjukkan prediksi yang lebih presisi.
+
+Kecepatan dan Kompleksitas:
+
+Random Forest biasanya lebih cepat untuk dilatih dan lebih sederhana untuk interpretasi.
+Gradient Boosting memerlukan lebih banyak waktu pelatihan tetapi sering kali memberikan performa yang sedikit lebih baik karena pengoptimalan iteratifnya.
+
+Faktor eksternal: Model berbasis fitur sudah mencakup faktor seperti harga dan diskon, sehingga time-series dapat fokus pada pola tren jangka panjang dan musiman.
+----------------------------------------------------------------------------------------------------------------------------------------
+
+Analisis Hasil model Prophet:
+RMSE dan MAE Tinggi:
+
+RMSE sebesar 103.16 dan MAE sebesar 85.26 menunjukkan bahwa prediksi memiliki deviasi yang besar dari nilai aktual.
+Hal ini menunjukkan bahwa Prophet belum menangkap pola penjualan dengan baik.
+
+MAPE (nonzero) Sangat Tinggi:
+
+MAPE sebesar 361.51% mengindikasikan bahwa persentase kesalahan relatif sangat tinggi.
+Ini dapat terjadi jika nilai aktual kecil dibandingkan prediksi, yang menyebabkan kesalahan relatif meningkat.
+
+Kemungkinan Penyebab:
+
+Variabilitas Tinggi pada Data: Prophet dirancang untuk menangkap pola musiman dan tren jangka panjang. Jika data memiliki fluktuasi tinggi atau tidak menunjukkan pola yang jelas, performa Prophet cenderung menurun.
+Faktor Eksternal Tidak Dipertimbangkan: Prophet tidak secara langsung mempertimbangkan variabel eksternal seperti promosi, harga, atau kategori produk, yang mungkin signifikan dalam dataset
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+Hasil Evaluasi ARIMA
+Parameter Model:
+
+Metrik Evaluasi:
+
+RMSE: 102.77
+MAE: 90.41
+MAPE (nonzero): 902.78%
+Masalah yang Ditemui:
+
+Terdapat ConvergenceWarning: "Maximum Likelihood optimization failed to converge."
+Hal ini dapat disebabkan oleh data dengan volatilitas tinggi atau parameter awal yang tidak optimal.
+Meski hasil evaluasi tersedia, model mungkin tidak sepenuhnya mencerminkan performa terbaik karena konvergensi belum tercapai.
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+Analisis dan Keputusan
+1. Model Berbasis Fitur (Random Forest & Gradient Boosting)
+Random Forest dan Gradient Boosting memiliki performa yang sangat baik dan mendekati identik.
+Keduanya unggul di RMSE dan MAE dibandingkan Prophet dan ARIMA, menunjukkan kemampuan superior dalam menangkap pola kompleks.
+Namun, MAPE cukup tinggi, mengindikasikan bahwa prediksi untuk nilai kecil masih perlu ditingkatkan.
+2. Model Berbasis Time-Series (Prophet & ARIMA)
+Prophet menunjukkan RMSE dan MAE yang sangat buruk, sementara ARIMA memiliki RMSE dan MAE yang sangat tinggi meskipun MAPE lebih rendah dari Prophet.
+Prophet lebih cocok untuk tren musiman, tetapi data ini tampaknya memiliki pola yang lebih kompleks dan dipengaruhi oleh fitur tambahan (seperti promosi dan diskon).
+3. Keputusan Akhir
+Gradient Boosting adalah pilihan terbaik karena memiliki RMSE, MAE, dan MAPE yang paling rendah secara keseluruhan.
+Random Forest adalah alternatif yang sangat dekat, tetapi Gradient Boosting sedikit lebih unggul dalam performa metrik.
+Keputusan ini dibuat karena model berbasis fitur menangkap pola data lebih baik dibanding model time-series.

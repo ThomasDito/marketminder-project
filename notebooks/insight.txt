@@ -1,0 +1,46 @@
+## Laporan Hasil Exploratory Data Analysis (EDA)
+
+### 1. Distribusi Data
+- **Distribusi Variabel Numerik:**
+  - `Price`: Distribusi harga menunjukkan pola normal, dengan beberapa outlier pada harga yang lebih tinggi.
+  - `Demand Forecast`: Sebagian besar permintaan berada pada kisaran rata-rata yang normal.
+  - `Units Sold`: Distribusi penjualan memperlihatkan nilai mayoritas berada di kisaran yang sama, dengan beberapa lonjakan untuk produk populer.
+
+- **Korelasi Antar Variabel:**
+  - Variabel `Price` memiliki korelasi negatif moderat dengan `Units Sold`, menunjukkan bahwa harga yang lebih tinggi cenderung menurunkan penjualan.
+  - `Demand Forecast` memiliki korelasi positif dengan `Units Sold`, menegaskan bahwa prediksi permintaan dapat digunakan untuk memodelkan penjualan.
+
+### 2. Pola Waktu
+- **Tren Harian:**
+  - Rata-rata penjualan harian hampir seragam di semua hari dalam seminggu, dengan sedikit variasi.
+  - Analisis lebih lanjut menunjukkan bahwa region berkontribusi terhadap pola ini.
+
+- **Tren Bulanan:**
+  - Penjualan cenderung meningkat pada bulan tertentu, terutama saat liburan atau musim promosi.
+  
+- **Tren Musiman:**
+  - Penjualan tertinggi terjadi pada musim tertentu (misalnya, musim liburan akhir tahun), sementara musim lain cenderung lebih stabil.
+
+### 3. Pengaruh Promo/Diskon
+- **Diskon:**
+  - Boxplot menunjukkan bahwa diskon tinggi (misalnya, di atas 50%) cenderung meningkatkan penjualan secara signifikan di semua region.
+  - Beberapa region lebih responsif terhadap diskon rendah dibandingkan yang lain.
+
+- **Promo Liburan:**
+  - Penjualan saat ada promo liburan lebih tinggi dibandingkan tanpa promosi.
+  - Analisis per region menunjukkan pola yang serupa dengan distribusi diskon.
+
+### 4. Penjualan Berdasarkan Kategori dan Region
+- **Kategori Produk:**
+  - Kategori tertentu, seperti `Groceries` dan `Electronics`, memiliki penjualan tertinggi.
+  - Kategori lain seperti `Toys` lebih berfluktuasi, terutama selama promosi.
+
+- **Penjualan per Region:**
+  - Region tertentu memiliki respons yang lebih tinggi terhadap diskon dan promosi dibandingkan region lain.
+  - Penjualan di region dengan populasi besar cenderung lebih stabil dibandingkan region kecil.
+
+### 5. Insight Utama
+- Diskon dan promosi adalah faktor kunci yang memengaruhi penjualan.
+- Region memiliki pola penjualan yang berbeda, sehingga strategi promosi harus disesuaikan.
+- Tren musiman dan bulanan dapat membantu perencanaan inventaris yang lebih baik.
+- Produk dengan permintaan tinggi seperti `Groceries` dapat diprioritaskan dalam pengelolaan stok.
