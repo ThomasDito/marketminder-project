@@ -9,11 +9,11 @@ from sklearn.preprocessing import MinMaxScaler
 # ==============================
 # Load Model & Dataset
 # ==============================
-model_path = "final_gradient_boosting_model.pkl"
-gb_model = joblib.load(model_path)
+# model_path = "final_gradient_boosting_model.pkl"
+gb_model = joblib.load("final_gradient_boosting_model.pkl")
 
-data_path = "main_data.csv"
-df = pd.read_csv(data_path)
+# data_path = "main_data.csv"
+df = pd.read_csv("main_data.csv")
 
 # Mendapatkan nilai min & max dari dataset asli sebelum normalisasi
 price_min, price_max = df["Price"].min(), df["Price"].max()
