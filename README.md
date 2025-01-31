@@ -44,4 +44,4 @@ streamlit run dashboard.py
 ```
 
 ## Dashboard Link
-[MarketMinder](https://bike-sharing-dashboard-mgqbxfcgxqsr7typrwznoz.streamlit.app/)
+[MarketMinder](https://marketminder-project-dashboard.streamlit.app/)
