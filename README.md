@@ -2,10 +2,15 @@
 Proyek ini bertujuan untuk memprediksi penjualan toko dengan integrasi machine learning.
 
 ## Struktur Proyek
-- **data/**: Berisi dataset.
-- **notebooks/**: Berisi Jupyter Notebook untuk eksplorasi dan analisis.
-- **models/**: Berisi model machine learning.
-- **src/**: Berisi kode utama aplikasi.
+1. **data/**: Berisi dataset.
+2. **notebooks/**: 
+- Berisi Jupyter Notebook untuk eksplorasi dan analisis
+- insight.txt yang berisi seluruh insight yang didapat dari proses EDA
+- dokumentasi.txt yang berisi seluruh insight dan dokumentasi lengkap dari setiap model
+3. **dashboard/**:
+- Berisi final model machine learning yang telah disimpan menggunakan joblib
+- main_data.csv yang digunakan untuk dashboard.py
+- dashboard.py berisi source code untuk membangun tampilan dashboard yang berisi I/O prediksi dan visualisasi data
 
 ## Langkah-Langkah
 1. Eksplorasi Data.
